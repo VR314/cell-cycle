@@ -4,6 +4,7 @@ import Wrapper from "./components/Wrapper";
 import G1 from "./pages/G1";
 
 // add breadcrumbs/status in the top (a mini cycle image)
+// https://stackoverflow.com/questions/49810663/add-text-in-css-chevron-shape
 
 export default function App() {
   let [pageID, setPageID] = React.useState(0);

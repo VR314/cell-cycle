@@ -1,8 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import Sketch from "react-p5";
 
-// TODO: make an animation with random movement?
-
 const canvasSize = 500;
 
 interface Vector {
