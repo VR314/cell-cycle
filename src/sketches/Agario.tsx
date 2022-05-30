@@ -1,10 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import Sketch from 'react-p5';
-// TOOD: add limited time
-// TODO: add sending score back to parent (through state update)
-// TODO: add randomly sized food
-// TODO: add enemies?? -- make black blobs with red stroke weight 2
+import React, { Dispatch, SetStateAction } from "react";
+import Sketch from "react-p5";
 
+// TODO: make an animation with random movement?
 
 const canvasSize = 500;
 
@@ -23,7 +20,13 @@ class Blob {
   color: string;
 
   // TODO: figure out ugly import
-  constructor(p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js"), position: Vector, radius: number, main: boolean, color: string | null) {
+  constructor(
+    p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js"),
+    position: Vector,
+    radius: number,
+    main: boolean,
+    color: string | null
+  ) {
     this.active = true;
     this.main = main;
     this.position = position;
@@ -32,36 +35,41 @@ class Blob {
     this.radius = radius;
     this.color = color
       ? color
-      : '#' + Math.floor(Math.random() * 16777215).toString(16);
+      : "#" + Math.floor(Math.random() * 16777215).toString(16);
   }
 
   eat(b: Blob) {
     this.radius = Math.sqrt(this.radius * this.radius + b.radius * b.radius);
     b.active = false;
+    this.speed = 13 - Math.pow(this.radius, 1.0 / 3);
   }
 }
 
-interface AgarioProps { agarioScore: number, setAgarioScore: Dispatch<SetStateAction<number>>; }
+interface AgarioProps {
+  setPageID: Dispatch<SetStateAction<number>>;
+}
 
 const Agario: React.FC<AgarioProps> = (props) => {
   let main: Blob;
   let smalls: Blob[] = [];
-  const [localScore, setLocalScore] = useState(props.agarioScore);
-  const [active, setActive] = useState(true);
 
-  const setup = (p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js"), canvasParentRef: Element) => {
+  const setup = (
+    p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js"),
+    canvasParentRef: Element
+  ) => {
     // prevents double canvases
-    document.getElementsByTagName('main').item(0)?.remove();
-    if (canvasParentRef.children.length == 0) {
+    document.getElementsByTagName("main").item(0)?.remove();
+    if (canvasParentRef.children.length === 0) {
       p5.createCanvas(canvasSize, canvasSize).parent(canvasParentRef);
     }
-    main = new Blob(p5, { x: 50, y: 50 }, 30, true, '#228C22');
+
+    main = new Blob(p5, { x: 50, y: 50 }, 30, true, "#228C22");
     for (let i = 0; i < canvasSize / 50; i++) {
       smalls.push(
         new Blob(
           p5,
           { x: Math.random() * canvasSize, y: Math.random() * canvasSize },
-          10,
+          Math.random() * 10 + 5,
           false,
           null
         )
@@ -69,28 +77,30 @@ const Agario: React.FC<AgarioProps> = (props) => {
     }
   };
 
-  const draw = (p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js")) => {
+  const draw = (
+    p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js")
+  ) => {
     p5.background(0);
     p5.strokeWeight(0.5);
     smalls = smalls.filter((b) => b.active);
     for (let b of smalls) {
       let dist = Math.sqrt(
         (b.position.x - main.position.x) * (b.position.x - main.position.x) +
-        (b.position.y - main.position.y) * (b.position.y - main.position.y)
+          (b.position.y - main.position.y) * (b.position.y - main.position.y)
       );
 
       if (dist < main.radius * 0.7) {
         main.eat(b);
-        setLocalScore(localScore+1)
       }
     }
+
     if (smalls.length < canvasSize / 50) {
       if (Math.random() < 0.1 * (canvasSize / 50 - smalls.length)) {
         smalls.push(
           new Blob(
             p5,
             { x: Math.random() * canvasSize, y: Math.random() * canvasSize },
-            10,
+            Math.random() * 10 + 10,
             false,
             null
           )
@@ -115,43 +125,34 @@ const Agario: React.FC<AgarioProps> = (props) => {
       y,
     };
 
-    p5.stroke('#00');
+    p5.stroke("#00");
     p5.strokeWeight(1);
     p5.fill(main.color);
     p5.ellipse(main.position.x, main.position.y, main.radius, main.radius);
-    // end game
-    if(localScore >= 10) {
-      setActive(false);
-    }
   };
 
-  const keyReleased = (e: { key: any; }) => {
+  const keyReleased = (e: { key: any }) => {
     switch (e.key) {
-      case 'ArrowUp':
+      case "ArrowUp":
         main.direction = { x: 0, y: 10 };
         break;
-      case 'ArrowDown':
+      case "ArrowDown":
         main.direction = { x: 0, y: -10 };
         break;
-      case 'ArrowRight':
+      case "ArrowRight":
         main.direction = { x: 10, y: 0 };
         break;
-      case 'ArrowLeft':
+      case "ArrowLeft":
         main.direction = { x: -10, y: 0 };
         break;
       default:
-        console.log('extra key pressed');
+        console.log("extra key pressed");
+        props.setPageID(1);
         break;
     }
   };
 
-  // current problem:
-  // - cannot update continuously render anything outside of the sketch in this component
-  // - updating parent state inside the setup/draw functions breaks the entire thing
-  return <>
-  {active && <Sketch setup={setup} draw={draw} keyReleased={keyReleased} />}
-  <h1> Score: {localScore}</h1> 
-  </>;
+  return <Sketch setup={setup} draw={draw} keyReleased={keyReleased} />;
 };
 
 export default Agario;

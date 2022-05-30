@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 // ALL WRAPPER STYLING HAPPENS HERE
-const Wrapper = (props:any) => {
+const Wrapper = (props: any) => {
   return (
     <div>
-      <h1>{props.title}</h1>
+      {/* <h1>{props.title}</h1> */}
       {props.children}
     </div>
   );

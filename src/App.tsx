@@ -1,17 +1,17 @@
-import * as React from 'react';
-import './style.css';
-import Agario from './sketches/Agario';
-import Wrapper from './components/Wrapper';
+import * as React from "react";
+import "./style.css";
+import Wrapper from "./components/Wrapper";
+import G1 from "./pages/G1";
+
+// add breadcrumbs/status in the top (a mini cycle image)
 
 export default function App() {
   let [pageID, setPageID] = React.useState(0);
-  let [agarioScore, setAgarioScore] = React.useState(0);
   switch (pageID) {
     case 0:
       return (
-        <Wrapper title={'G1: Cell Growth'}>
-           <Agario agarioScore={agarioScore} setAgarioScore={setAgarioScore}/>
-           <h1>Score: {agarioScore}</h1>
+        <Wrapper title={"G1: Cell Growth"}>
+          <G1 setPageID={setPageID} />
         </Wrapper>
       );
     case 1:
