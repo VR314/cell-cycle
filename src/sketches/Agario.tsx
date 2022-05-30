@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import Sketch from "react-p5";
 
 const canvasSize = 500;
@@ -44,7 +44,7 @@ class Blob {
 }
 
 interface AgarioProps {
-  setPageID: Dispatch<SetStateAction<number>>;
+  // setPageID: Dispatch<SetStateAction<number>>;
 }
 
 const Agario: React.FC<AgarioProps> = (props) => {
@@ -145,7 +145,7 @@ const Agario: React.FC<AgarioProps> = (props) => {
         break;
       default:
         console.log("extra key pressed");
-        props.setPageID(1);
+        // props.setPageID(1);
         break;
     }
   };

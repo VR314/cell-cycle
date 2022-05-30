@@ -3,7 +3,7 @@ import Agario from "../sketches/Agario";
 const G1 = (props: any) => {
   return (
     <div style={{ justifyContent: "space-around", display: "flex" }}>
-      <Agario setPageID={props.setPageID} />
+      <Agario />
       <div style={{ maxWidth: "50%" }}>
         <h1>G1: Cell Growth</h1>
         <p>
