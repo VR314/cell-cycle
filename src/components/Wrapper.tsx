@@ -1,15 +1,53 @@
 import React from "react";
 
-// add breadcrumbs/status in the top (a mini cycle image)
-// https://stackoverflow.com/questions/49810663/add-text-in-css-chevron-shape
-
-// TODO: implement next/back buttons on the top, next to the chevron styling at the top
+// TODO: bold the current page
+// TODO: style buttons
 
 const Wrapper = (props: any) => {
   return (
     <div>
-      <div style={{ position: "sticky", top: 0, padding: '15px', background: 'red', marginTop: 0 }}>HEader</div>
-      {/* <h1>{props.title}</h1> */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          padding: "15px",
+          background: "red",
+          marginTop: 0,
+          justifyItems: "stretch",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          <button
+            onClick={() => {
+              if (props.pageID > 0) {
+                props.setPageID(props.pageID - 1);
+              }
+            }}
+          >
+            BACK
+          </button>
+        </div>
+        <div>
+          <div className="chevron"> G1 </div>
+          <div className="chevron"> S </div>
+          <div className="chevron"> G2 </div>
+          <div className="chevron"> MITOSIS </div>
+        </div>
+        <div>
+          <button
+            onClick={() => {
+              if (props.pageID < 5) {
+                props.setPageID(props.pageID + 1);
+              }
+            }}
+          >
+            NEXT
+          </button>
+        </div>
+      </div>
       {props.children}
     </div>
   );

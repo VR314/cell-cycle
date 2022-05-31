@@ -1,3 +1,47 @@
-h1, p {
+h1,
+p {
   font-family: Lato;
+}
+
+.chevron {
+  display: inline-block;
+  position: relative;
+  clear: both;
+  padding: 12px;
+  height: 20px;
+  width: 150px;
+  text-align: center;
+}
+
+.chevron:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50%;
+  width: 100%;
+  background: #009999;
+  color: white;
+  -webkit-transform: skew(60deg, 0deg);
+  -moz-transform: skew(60deg, 0deg);
+  -ms-transform: skew(60deg, 0deg);
+  -o-transform: skew(60deg, 0deg);
+  transform: skew(60deg, 0deg);
+  z-index: -1;
+}
+
+.chevron:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 50%;
+  width: 100%;
+  background: #009999;
+  -webkit-transform: skew(-60deg, 0deg);
+  -moz-transform: skew(-60deg, 0deg);
+  -ms-transform: skew(-60deg, 0deg);
+  -o-transform: skew(-60deg, 0deg);
+  transform: skew(-60deg, 0deg);
+  z-index: -1;
 }

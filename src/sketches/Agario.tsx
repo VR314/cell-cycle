@@ -1,6 +1,8 @@
 import React from "react";
 import Sketch from "react-p5";
 
+// TODO: add score label
+
 const canvasSize = 500;
 
 interface Vector {
@@ -111,8 +113,8 @@ const Agario: React.FC<AgarioProps> = (props) => {
       p5.ellipse(b.position.x, b.position.y, b.radius, b.radius);
     }
 
-    let x = main.position.x + (main.direction.x * main.speed) / 60;
-    let y = main.position.y - (main.direction.y * main.speed) / 60; // subtract in y direction bc up is "negative y"
+    let x = main.position.x + (main.direction.x * main.speed) / 50;
+    let y = main.position.y - (main.direction.y * main.speed) / 50; // subtract in y direction bc up is "negative y"
     x = Math.min(x, canvasSize);
     x = Math.max(x, 0);
     y = Math.min(y, canvasSize);
