@@ -18,12 +18,13 @@ class Blob {
   speed: number;
   radius: number;
   color: string;
+  mass: number;
 
   // TODO: figure out ugly import
   constructor(
     p5: import("/workspace/cell-cycle/node_modules/react-p5/node_modules/@types/p5/index.js"),
     position: Vector,
-    radius: number,
+    mass: number,
     main: boolean,
     color: string | null
   ) {
@@ -32,24 +33,22 @@ class Blob {
     this.position = position;
     this.direction = { x: 0, y: 0 };
     this.speed = 10;
-    this.radius = radius;
+    this.radius = mass;
+    this.mass = mass;
     this.color = color
       ? color
       : "#" + Math.floor(Math.random() * 16777215).toString(16);
   }
 
   eat(b: Blob) {
+    this.mass += b.mass;
     this.radius = Math.sqrt(this.radius * this.radius + b.radius * b.radius);
     b.active = false;
     this.speed = 13 - Math.pow(this.radius, 1.0 / 3);
   }
 }
 
-interface AgarioProps {
-  // setPageID: Dispatch<SetStateAction<number>>;
-}
-
-const Agario: React.FC<AgarioProps> = (props) => {
+const Agario: React.FC = (props) => {
   let main: Blob;
   let smalls: Blob[] = [];
 
@@ -69,7 +68,7 @@ const Agario: React.FC<AgarioProps> = (props) => {
         new Blob(
           p5,
           { x: Math.random() * canvasSize, y: Math.random() * canvasSize },
-          Math.random() * 10 + 5,
+          Math.round(Math.random() * 10 + 5),
           false,
           null
         )
@@ -89,7 +88,7 @@ const Agario: React.FC<AgarioProps> = (props) => {
           (b.position.y - main.position.y) * (b.position.y - main.position.y)
       );
 
-      if (dist < main.radius * 0.7) {
+      if (dist < main.radius * 0.5) {
         main.eat(b);
       }
     }
@@ -100,7 +99,7 @@ const Agario: React.FC<AgarioProps> = (props) => {
           new Blob(
             p5,
             { x: Math.random() * canvasSize, y: Math.random() * canvasSize },
-            Math.random() * 10 + 10,
+            Math.round(Math.random() * 10 + 10),
             false,
             null
           )

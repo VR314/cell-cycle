@@ -7,11 +7,11 @@ const S = (props: any) => {
       <div style={{ maxWidth: "50%" }}>
         <h1>S: DNA Replication</h1>
         <p>
-          jhdsalfhd sjkfhsdajkfhsjdkahf kjldsahfkjljf skljdahfkl hasdkfh aksjdhf asd
+          jhdsalfhd sjkfhsdajkfhsjdkahf 
         </p>
 
         <p>
-          {"<"} The minigame to the left represents fsadhjf kjasdjhf asd fakjdsfkl s
+          {"<"} The minigame to the left represents 
         </p>
       </div>
     </div>
