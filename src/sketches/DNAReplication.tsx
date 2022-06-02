@@ -37,6 +37,13 @@ const DNAReplication: React.FC = (props) => {
             break;
         }
       }
+
+      // DELETE ALL DUPS FROM TEMPLATE SO DUPLICATE KEYSTROKES DON'T SCREW UP THE GAME -- 
+      for (let i = 1; i < template.length - 1; i++) {
+        if (template[i] == template[i + 1]) {
+          template.splice(i, 1);
+        }
+      }
       console.log(template);
     }
   };
@@ -82,11 +89,9 @@ const DNAReplication: React.FC = (props) => {
       p5.textSize(45);
       // fix rendering incorrect typed letters as red
       if (i === 2) {
-        if (!correct) {
-          p5.fill("#FF0000");
+        if (correct) {
+          p5.text(entered[currentIndex + i - 2], x + i * dx, 350, dx, 100);
         }
-        p5.text(entered[currentIndex + i - 2], x + i * dx, 350, dx, 100);
-        p5.fill('#FFFFFF')
       } else {
         if (entered.length <= currentIndex + i - 1) {
           continue;
@@ -97,8 +102,6 @@ const DNAReplication: React.FC = (props) => {
     }
   };
 
-
-  //TODO: after correct letter guessed, remove all of entered after that letter (to prevent extras)
   const keyPressed = (e: { key: any }) => {
     console.log(e.key);
     switch (e.key) {
@@ -107,10 +110,12 @@ const DNAReplication: React.FC = (props) => {
         if (template[currentIndex] === "T") {
           correct = true;
           currentIndex++;
+          entered[currentIndex] = " ";
         } else {
           correct = false;
         }
-        console.log(template[currentIndex]);
+        console.log(entered);
+        console.log(currentIndex);
         console.log(e.key);
         break;
       case "g":
@@ -118,10 +123,12 @@ const DNAReplication: React.FC = (props) => {
         if (template[currentIndex] === "C") {
           correct = true;
           currentIndex++;
+          entered[currentIndex] = " ";
         } else {
           correct = false;
         }
-        console.log(template[currentIndex]);
+        console.log(entered);
+        console.log(currentIndex);
         console.log(e.key);
         break;
       case "t":
@@ -129,10 +136,12 @@ const DNAReplication: React.FC = (props) => {
         if (template[currentIndex] === "A") {
           correct = true;
           currentIndex++;
+          entered[currentIndex] = " ";
         } else {
           correct = false;
         }
-        console.log(template[currentIndex]);
+        console.log(entered);
+        console.log(currentIndex);
         console.log(e.key);
         break;
       case "c":
@@ -140,10 +149,12 @@ const DNAReplication: React.FC = (props) => {
         if (template[currentIndex] === "G") {
           correct = true;
           currentIndex++;
+          entered[currentIndex] = " ";
         } else {
           correct = false;
         }
-        console.log(template[currentIndex]);
+        console.log(entered);
+        console.log(currentIndex);
         console.log(e.key);
         break;
       default:
