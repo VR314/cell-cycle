@@ -4,11 +4,12 @@ import Wrapper from "./components/Wrapper";
 import G1 from "./pages/G1";
 import S from "./pages/S";
 import G2 from "./pages/G2";
+import Mitosis from "./pages/Mitosis";
 
 export default function App() {
   let [pageID, setPageID] = React.useState(0);
   switch (pageID) {
-    case 1:
+    case 0:
       return (
         <Wrapper
           title={"G1: Cell Growth"}
@@ -18,7 +19,7 @@ export default function App() {
           <G1 setPageID={setPageID} />
         </Wrapper>
       );
-    case 0:
+    case 1:
       return (
         <Wrapper
           title={"S: DNA Replication"}
@@ -38,7 +39,18 @@ export default function App() {
           <G2 setPageID={setPageID} />
         </Wrapper>
       );
+
+    case 3:
+      return (
+        <Wrapper
+          title={"Mitosis: Cell Division"}
+          pageID={pageID}
+          setPageID={setPageID}
+        >
+          <Mitosis setPageID={setPageID} />
+        </Wrapper>
+      );
     default:
-      return <h1> unimplemented page </h1>;
+      return <h1> The End </h1>;
   }
 }

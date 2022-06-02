@@ -12,14 +12,14 @@ const G2 = (props: any) => {
         </p>
 
         <p>
-          During the G2, the cell grows more, makes more proteins and
+          During G2, the cell grows more, makes more proteins and
           organelles, and begins to orient its organelles in preparation for
           mitosis.
         </p>
 
         <p>
           {"<"} The minigame to the left represents a cell consuming nutrients
-          and other cells from its envia=ronment. Use arrow keys to control the
+          and other cells from its environment. Use arrow keys to control the
           movement of the dark green cell and eat as much food as you can.
         </p>
       </div>

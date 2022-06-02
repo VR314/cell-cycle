@@ -11,7 +11,6 @@ const Wrapper = (props: any) => {
           position: "sticky",
           top: 0,
           padding: "15px",
-          background: "red",
           marginTop: 0,
           justifyItems: "stretch",
           display: "flex",

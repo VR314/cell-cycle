@@ -1,6 +1,20 @@
 h1,
 p {
-  font-family: Lato;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 5em;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+body {
+  background-color: #6abe83;
+  color: #dee2d1;
 }
 
 .chevron {
@@ -11,6 +25,7 @@ p {
   height: 20px;
   width: 150px;
   text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chevron:before {
@@ -20,7 +35,7 @@ p {
   left: 0;
   height: 50%;
   width: 100%;
-  background: #009999;
+  background: #f06966;
   color: white;
   -webkit-transform: skew(60deg, 0deg);
   -moz-transform: skew(60deg, 0deg);
@@ -37,7 +52,7 @@ p {
   right: 0;
   height: 50%;
   width: 100%;
-  background: #009999;
+  background: #f06966;
   -webkit-transform: skew(-60deg, 0deg);
   -moz-transform: skew(-60deg, 0deg);
   -ms-transform: skew(-60deg, 0deg);
